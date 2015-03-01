@@ -216,6 +216,9 @@ public class MainActions {
                 imageFile.setFileType(type.getType().equals("image") ? 1 : 2);
                 fileDao.save(imageFile);
                 fileArr.add(imageFile.toJSON());
+
+                me.setHeadShortUrl(imageFile.getShortPath());
+                uDao.update(me);
             }
         }
         
@@ -367,26 +370,7 @@ public class MainActions {
             res.add("msg", "您的apiKey已过期,您的账户可能被别人登陆，请修改密码或重新登陆");
             return res.toString();
         }
-			/*----------
-			 * WcUser mo=uDao.findById("10000");
-			if (!me.getFriends().contains(mo) && me!= mo){
-				me.getFriends().add(mo);
-				mo.getFriends().add(me);
-				uDao.update(mo);
-				uDao.update(me);
-			}*/
-			
-			/*if (pageSize==null)
-				pageSize=25;
-			if (pageIndex==null);
-				pageIndex=1;
-			List<WcUser> ulist=uDao.findByFriend(me,(pageIndex-1)*pageSize,pageSize); //me.getFriends();
-*/            //ulist.add(mo);
 
-//			if(!StringUtil.isNullOrEmpty(nickName))
-//				ulist=uDao.searchByUserNickname(nickName, (pageIndex-1)*pageSize,pageSize);
-//			else
-//				ulist=uDao.findAll((pageIndex-1)*pageSize,pageSize);
         
         SimpleJSONArray userArr = new SimpleJSONArray();
         for (WcUser u : me.getFriends()) {
@@ -416,16 +400,15 @@ public class MainActions {
         }
         
         WcUser user;
-        if (StringUtil.isNullOrEmpty(userId))
+        if (!StringUtil.isNullOrEmpty(userId))
             user = me;
         else {
             user = uDao.findById(userId);
         }
-        
+
         res.add("status", 1);
         res.add("msg", "搜索好友成功");
         res.add("userDetail", user.toRichJSON());
-        
         return res.toString();
     }
 		
@@ -478,7 +461,9 @@ public class MainActions {
             me.setLatitude(latitude);
         if (!StringUtil.isNullOrEmpty(mLang)) me.setmLang(mLang);
         if (!StringUtil.isNullOrEmpty(lLang)) me.setlLang(lLang);
-        
+
+        MainV2Actions.updateUserMLangList(mLang, me);
+
         uDao.update(me);
         res.add("status", 1);
         res.add("msg", "修改资料成功成功");

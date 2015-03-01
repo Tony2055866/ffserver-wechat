@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -84,8 +86,6 @@ public class MainV2Actions {
 		WcUser user = null;
 		if(uname.contains("@"))
 			user = uDao.findByEmail(uname);
-//		else
-//			user = uDao.findByMobile(uname);
 		
 		if (user == null) {
 			logger.info("登陆失败，该用户名不存在，您可以先注册");
@@ -149,15 +149,10 @@ public class MainV2Actions {
 
 		//WcFile file=fileDao.findById(userHead);
 		WcUser user = new WcUser();
-		
 		user.setUserNickname(name);
 		user.setUserPassword(uPass);
 		user.setEmail(email);
 		
-		//user.setUserDescription(description);
-		//user.setUserNickname(nickName);
-		//if(file!=null)
-		//user.setUserHead(file);
 		user.setmLang(mLang);
 		user.setlLang(lLang);
 		
@@ -166,18 +161,10 @@ public class MainV2Actions {
 		
 		logger.info("save user:" + user);
 		uDao.save(user);
-			
-		if(!mLang.trim().equals("")){
-			String ids[] = mLang.split(",");
-			UserLangDao dao = new UserLangDao();
-			for(String id:ids){
-				UserLang userlang = new UserLang();
-				userlang.setLangId(Integer.parseInt(id));
-				userlang.setUserId(user.getUserId());
-				dao.save(userlang);
-			}
-		}
-		
+
+		//更新用户的母语列表，用于匹配用户
+		updateUserMLangList(mLang, user);
+
 		registerOpenFireUser(user);
 		res.add("status", 1);
 		res.add("msg", "注册成功");
@@ -185,7 +172,29 @@ public class MainV2Actions {
 		res.add("userInfo", user.toJSON());
 		return res.toString();
 	}
-	
+
+	public static void updateUserMLangList(String mLang, WcUser user) {
+		//先删除原有的
+		EntityManager manager = UserLangDao.getEntityManager();
+		manager.getTransaction().begin();
+		Query query = manager.createNativeQuery("delete from user_lang where userId=?");
+		query.setParameter(1, mLang);
+		query.executeUpdate();
+		manager.getTransaction().commit();
+
+		//插入新的
+		UserLangDao dao = new UserLangDao();
+		if(!mLang.trim().equals("")){
+			String ids[] = mLang.split(",");
+			for(String id:ids){
+				UserLang userlang = new UserLang();
+				userlang.setLangId(Integer.parseInt(id));
+				userlang.setUserId(user.getUserId());
+				dao.save(userlang);
+			}
+		}
+	}
+
 	/*
 	 * 注册openFire
 	 * */

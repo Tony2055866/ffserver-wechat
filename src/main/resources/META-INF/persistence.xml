@@ -9,6 +9,7 @@
 		<class>com.wc.bean.WcMusic</class>
 		<class>com.wc.bean.WcFile</class>
 		<class>com.wc.bean.UserLang</class>
+
 		<properties>
 			<property name="hibernate.connection.driver_class"
 				value="com.mysql.jdbc.Driver" />

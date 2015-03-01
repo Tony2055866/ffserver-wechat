@@ -15,7 +15,7 @@ import com.wc.jpa.EntityManagerHelper;
 
 public class UserLangDao {
 
-	private EntityManager getEntityManager() {
+	public static EntityManager getEntityManager() {
 		return EntityManagerHelper.getEntityManager();
 	}
 
@@ -74,12 +74,23 @@ public class UserLangDao {
 	
 	
 	public static void main(String[] args) {
+		/* in 查询
 		UserLangDao dao = new UserLangDao();
 		
 		List<Integer> ids = new ArrayList<Integer>();
 		ids.add(1);
 		ids.add(2);
 		List<UserLang> list = dao.findByPropertyIn("langId", ids);
-		System.out.println(list.size());
+		System.out.println(list.size());*/
+
+		getEntityManager().getTransaction().begin();
+
+		Query query = getEntityManager().createNativeQuery("delete from user_lang where userId='aaabb'");
+//		List list= query.getResultList();
+//		System.out.println("list: " + list);
+
+		int res = query.executeUpdate();
+		System.out.println( "delete:" + res);
+		getEntityManager().getTransaction().commit();
 	}
 }

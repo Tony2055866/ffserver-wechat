@@ -43,6 +43,9 @@ public class WcUser  implements java.io.Serializable {
      private Timestamp userBirthday;
      private String userDescription;
      private WcFile userHead;
+
+    private  String headShortUrl = DEFAULT_HEAD;
+
      private Timestamp registerDate=new Timestamp(System.currentTimeMillis());
      private Double longitude;
      private Double latitude;
@@ -306,7 +309,16 @@ public class WcUser  implements java.io.Serializable {
         this.userState = userState;
     }
 
-    
+
+    @Column(name="headShortUrl")
+    public String getHeadShortUrl() {
+        return headShortUrl;
+    }
+
+    public void setHeadShortUrl(String headShortUrl) {
+        this.headShortUrl = headShortUrl;
+    }
+
     @ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.PERSIST)
     @JoinTable(name="wc_user_user",
     joinColumns={@JoinColumn(name="userId",referencedColumnName="userId")},
@@ -330,7 +342,8 @@ public class WcUser  implements java.io.Serializable {
 		json.add("mLang", mLang);
 		json.add("lLang", lLang);
 		json.add("description", userDescription);
-		json.add("userHead", userHead==null?DEFAULT_HEAD:userHead.getShortPath());
+//		json.add("userHead", userHead==null?DEFAULT_HEAD:userHead.getShortPath());
+        json.add("userHead", headShortUrl);
 		return json;
 	}
 
@@ -341,7 +354,9 @@ public class WcUser  implements java.io.Serializable {
 		json.add("nickName", userNickname);
 		json.add("description", userDescription);
 		json.add("registerDate", registerDate);
-		json.add("userHead", userHead==null?DEFAULT_HEAD:userHead.getShortPath());
+//		json.add("userHead", userHead==null?DEFAULT_HEAD:userHead.getShortPath());
+        json.add("userHead", headShortUrl);
+
 		json.add("sex", userSex);
 		json.add("age", userAge);
 		//json.add("qq", userQq);
@@ -358,7 +373,7 @@ public class WcUser  implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "WcUser [email=" + email + ", , lLang="
-				+ lLang + ", mLang=" + mLang + ", userHead=" + userHead
+				+ lLang + ", mLang=" + mLang + ", userHead=" + headShortUrl
 				+ ", userId=" + userId + ", userName=" + userName
 				+ ", userPassword=" + userPassword + "]";
 	}

@@ -365,7 +365,7 @@ public class WcUserDAO  {
 
 	public List<WcUser> searchByUserNickname(String nickName, final int...rowStartIdxAndCount) {
 		// TODO Auto-generated method stub
-		EntityManagerHelper.log("����ǳ�ģ������", Level.INFO, null);
+		EntityManagerHelper.log("searchByUserNickname", Level.INFO, null);
 		try {
 			nickName="%"+nickName+"%";
 		final String queryString = "select model from WcUser model where model.userNickname like ?1 order by model.userId desc";
