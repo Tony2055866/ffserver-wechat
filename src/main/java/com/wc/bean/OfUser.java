@@ -14,7 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
  * OfUser entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name="ofuser"
+@Table(name="ofUser"
     ,catalog="openfire"
 )
 

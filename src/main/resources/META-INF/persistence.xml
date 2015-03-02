@@ -14,9 +14,9 @@
 			<property name="hibernate.connection.driver_class"
 				value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.connection.url"
-				value="jdbc:mysql://localhost:3306/openfire?useUnicode=true&amp;characterEncoding=UTF-8" />
+				value="jdbc:mysql://www.acmerblog.com:3306/openfire?useUnicode=true&amp;characterEncoding=UTF-8" />
 			<property name="hibernate.connection.username" value="root" />
-			<property name="hibernate.connection.password" value="root" />
+			<property name="hibernate.connection.password" value="qwer1234" />
 		</properties>
 	</persistence-unit>
 </persistence>
