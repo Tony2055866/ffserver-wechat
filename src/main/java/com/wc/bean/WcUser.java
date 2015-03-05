@@ -323,7 +323,6 @@ public class WcUser  implements java.io.Serializable {
     @JoinTable(name="wc_user_user",
     joinColumns={@JoinColumn(name="userId",referencedColumnName="userId")},
     inverseJoinColumns={@JoinColumn(name="userIdRef",referencedColumnName="userId")})
-    
 	public List<WcUser> getFriends() {
 		return friends;
 	}
@@ -370,7 +369,17 @@ public class WcUser  implements java.io.Serializable {
 		return json;
 	}
 
-	@Override
+    @Override
+    public boolean equals(Object obj) {
+
+        if(obj != null && obj instanceof WcUser){
+            WcUser o = (WcUser) obj;
+            return o.userId == this.userId;
+        }
+        return false;
+    }
+
+    @Override
 	public String toString() {
 		return "WcUser [email=" + email + ", , lLang="
 				+ lLang + ", mLang=" + mLang + ", userHead=" + headShortUrl

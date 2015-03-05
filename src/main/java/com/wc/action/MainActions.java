@@ -258,6 +258,9 @@ public class MainActions {
             for (String id : ids) {
                 list.add(Integer.parseInt(id));
             }
+
+
+
             //找到 对应的 userId 列表
             List<UserLang> userLangList = userLangDao.findByPropertyIn("userId", list, 0, 10);
             logger.info("findFriend userLangList:" + userLangList);
@@ -272,9 +275,11 @@ public class MainActions {
         }
         SimpleJSONArray userArr = new SimpleJSONArray();
         if (ulist != null) {
+            List<WcUser> friends = me.getFriends();
             for (WcUser u : ulist) {
                 logger.debug("findFriend ulist:" + u);
-                if (!u.getUserId().equals(me.getUserId()))
+                //还有判断，推荐的用户不在我的好友中
+                if (!u.getUserId().equals(me.getUserId()) && !friends.contains(u))
                     userArr.add(u.toJSON());
             }
         }
