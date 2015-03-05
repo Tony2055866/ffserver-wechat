@@ -363,15 +363,15 @@ public class MainActions {
                                @FormParam("pageSize") Integer pageSize,
                                @FormParam("pageIndex") Integer pageIndex) {
         WcUser me = uDao.findByApiKey(apiKey);
-        logger.info("getMyFriends:" + me.getFriends());
-        
+
         if (me == null) {
             res.add("status", -100);
-            res.add("msg", "您的apiKey已过期,您的账户可能被别人登陆，请修改密码或重新登陆");
+            res.add("msg", "您的登录已过期,请重新登陆");
             return res.toString();
         }
+        logger.info("getMyFriends:" + me.getFriends());
 
-        
+
         SimpleJSONArray userArr = new SimpleJSONArray();
         for (WcUser u : me.getFriends()) {
             userArr.add(u.toJSON());

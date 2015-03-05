@@ -139,8 +139,10 @@ public class WcUserDAO  {
         } catch (RuntimeException re) {
         				EntityManagerHelper.log("find failed", Level.SEVERE, re);
 	            throw re;
-        }
-    }    
+        }finally {
+				getEntityManager().close();
+			}
+	}
     
 
 /**

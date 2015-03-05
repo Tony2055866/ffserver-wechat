@@ -20,11 +20,14 @@ public class InitServlet extends HttpServlet {
         new Thread(){
             @Override
             public void run() {
-                userDAO.findById("11");
-                try {
-                    Thread.sleep(3600 *1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                while(true){
+                    userDAO.findById("11");
+                    try {
+                        Thread.sleep(120*1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }
         }.start();
