@@ -99,6 +99,7 @@
     </dependencies>
     
     <build>
+        
         <resources>
             <resource>
                 <directory>src/main/java</directory>
@@ -106,8 +107,10 @@
                     <include>**/*.xml</include>
                 </includes>
             </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
         </resources>
-
        <plugins>
            
            <plugin>
