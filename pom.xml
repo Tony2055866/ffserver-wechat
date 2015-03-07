@@ -72,7 +72,7 @@
             </resource>
         </resources>
 
-        <plugins>
+       <!-- <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -92,13 +92,13 @@
                     </webResources>
                 </configuration>
             </plugin>
-            <!--这个插件用于添加多个源码目录(也可以用于编译自动生成的代码) <plugin> <groupId>org.codehaus.mojo</groupId> 
+            &lt;!&ndash;这个插件用于添加多个源码目录(也可以用于编译自动生成的代码) <plugin> <groupId>org.codehaus.mojo</groupId> 
                 <artifactId>build-helper-maven-plugin</artifactId> <version>1.7</version> 
                 <executions> <execution> <id>add-source</id> <phase>generate-sources</phase> 
                 <goals> <goal>add-source</goal> </goals> <configuration> <meminitial>128m</meminitial> 
                 <maxmem>1024m</maxmem> <sources> <source>${basedir}/src/thrift/gen-java</source> 
-                </sources> </configuration> </execution> </executions> </plugin> -->
-            <!-- 编译使用1.6 -->
+                </sources> </configuration> </execution> </executions> </plugin> &ndash;&gt;
+            &lt;!&ndash; 编译使用1.6 &ndash;&gt;
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -119,7 +119,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <!-- 忽略测试 -->
+                    &lt;!&ndash; 忽略测试 &ndash;&gt;
                     <skip>true</skip>
                 </configuration>
             </plugin>
@@ -133,10 +133,10 @@
                     </includes>
                 </configuration>
             </plugin>
-            <!-- <plugin> <inherited>true</inherited> <groupId>org.apache.maven.plugins</groupId> 
+            &lt;!&ndash; <plugin> <inherited>true</inherited> <groupId>org.apache.maven.plugins</groupId> 
                 <artifactId>maven-source-plugin</artifactId> <executions> <execution> <id>attach-sources</id> 
                 <goals> <goal>jar</goal> <packaging>war</packaging> <name>migc_activity_calculator</name> 
-                </goals> </execution> </executions> </plugin> -->
+                </goals> </execution> </executions> </plugin> &ndash;&gt;
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -145,7 +145,7 @@
                 </configuration>
             </plugin>
 
-        </plugins>
+        </plugins>-->
     </build>
     
 </project>
