@@ -319,7 +319,7 @@ public class WcUser  implements java.io.Serializable {
         this.headShortUrl = headShortUrl;
     }
 
-    @ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.PERSIST)
+    @ManyToMany(fetch=FetchType.EAGER,cascade=CascadeType.PERSIST)
     @JoinTable(name="wc_user_user",
     joinColumns={@JoinColumn(name="userId",referencedColumnName="userId")},
     inverseJoinColumns={@JoinColumn(name="userIdRef",referencedColumnName="userId")})

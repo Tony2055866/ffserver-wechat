@@ -258,8 +258,7 @@ public class MainActions {
             for (String id : ids) {
                 list.add(Integer.parseInt(id));
             }
-
-
+            
 
             //找到 对应的 userId 列表
             List<UserLang> userLangList = userLangDao.findByPropertyIn("userId", list, 0, 10);
@@ -274,6 +273,8 @@ public class MainActions {
             }
         }
         SimpleJSONArray userArr = new SimpleJSONArray();
+        
+        
         if (ulist != null) {
             List<WcUser> friends = me.getFriends();
             for (WcUser u : ulist) {
@@ -345,6 +346,7 @@ public class MainActions {
         }
         
         WcUser u = uDao.findById(userId);
+        
         if (!me.getFriends().contains(u)) {
             res.add("status", -1);
             res.add("msg", "删除好友失败，你俩本来就不是好友");
