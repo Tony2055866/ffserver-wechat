@@ -79,7 +79,7 @@
                <artifactId>maven-compiler-plugin</artifactId>
                <version>3.2</version>
                <configuration>
-                   <compilerArgument>-verbose -bootclasspath ${java.class.path}</compilerArgument>
+                   <compilerArgument>-verbose -bootclasspath "src/main/webapp/WEB-INF/lib/*"</compilerArgument>
                </configuration>
            </plugin>
        </plugins>
