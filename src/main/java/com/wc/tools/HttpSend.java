@@ -56,7 +56,6 @@ public class HttpSend {
 			connection.setUseCaches(false);
 			connection.connect();
 
-			//POST方法时使用
 			DataOutputStream out = new DataOutputStream(connection.getOutputStream());
 			out.writeBytes(param);
 			out.flush();
@@ -83,7 +82,6 @@ public class HttpSend {
 		
 	}
 	/**
-	 * 转为16进制方法
 	 * @param str
 	 * @return
 	 * @throws UnsupportedEncodingException 

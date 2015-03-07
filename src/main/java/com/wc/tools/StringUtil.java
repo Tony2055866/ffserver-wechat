@@ -15,15 +15,14 @@ public class StringUtil {
 		if (strLen < strLength) {
 		while (strLen < strLength) {
 		StringBuffer sb = new StringBuffer();
-		sb.append("0").append(str);//×ó²¹0
-		// sb.append(str).append("0");//ÓÒ²¹0
+		sb.append("0").append(str);//å·¦è¡¥0
+		// sb.append(str).append("0");//å³è¡¥0
 		str = sb.toString();
 		strLen = str.length();
 		}
 		}
 		return str;
 	}
-	
 	
 	public static String getIP(HttpServletRequest request)
 	{
