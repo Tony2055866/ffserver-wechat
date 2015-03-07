@@ -19,11 +19,7 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     
-    <servlet>
-        <servlet-name>initServlet</servlet-name>
-        <servlet-class>com.wc.action.InitServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+    
     
     <servlet-mapping>
         <servlet-name>JAX-RS Servlet</servlet-name>

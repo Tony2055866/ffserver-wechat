@@ -184,7 +184,7 @@ public class MainV2Actions {
 
 		//插入新的
 		UserLangDao dao = new UserLangDao();
-		if(!mLang.trim().equals("")){
+		if(mLang !=null && !mLang.trim().equals("")){
 			String ids[] = mLang.split(",");
 			for(String id:ids){
 				UserLang userlang = new UserLang();

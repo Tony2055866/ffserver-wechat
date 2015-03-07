@@ -466,8 +466,9 @@ public class MainActions {
             me.setLatitude(latitude);
         if (!StringUtil.isNullOrEmpty(mLang)) me.setmLang(mLang);
         if (!StringUtil.isNullOrEmpty(lLang)) me.setlLang(lLang);
-
-        MainV2Actions.updateUserMLangList(mLang, me);
+        
+        if(mLang != null)
+            MainV2Actions.updateUserMLangList(mLang, me);
 
         uDao.update(me);
         res.add("status", 1);
